@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://kmoot5qnw5u1"]
+
+[ext_resource type="Script" path="res://Players/player.gd" id="1_2x2vl"]
+[ext_resource type="Texture2D" uid="uid://bvgo8qr16y0et" path="res://Players/squishy-jump.png" id="1_3j8sw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwiil"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_2x2vl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lwiil")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -4)
+texture = ExtResource("1_3j8sw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
