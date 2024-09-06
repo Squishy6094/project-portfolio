@@ -3,17 +3,28 @@
 [ext_resource type="Script" path="res://Players/player.gd" id="1_2x2vl"]
 [ext_resource type="Texture2D" uid="uid://bvgo8qr16y0et" path="res://Players/squishy-jump.png" id="1_3j8sw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lwiil"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ns3jy"]
+size = Vector2(14, 14)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_2x2vl")
+SPEED = 70
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_lwiil")
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_ns3jy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -4)
 texture = ExtResource("1_3j8sw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+drag_vertical_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+editor_draw_drag_margin = true

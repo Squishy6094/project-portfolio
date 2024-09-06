@@ -1,22 +1,25 @@
 extends CharacterBody2D
 
-
 @export var SPEED = 100
 @export var ACCEL = 5
 
-func _physics_process(_delta: float) -> void:
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var directionX := Input.get_axis("player_left", "player_right")
-	var directionY := Input.get_axis("player_up", "player_down")
-	if directionX:
-		velocity.x = clamp(velocity.x + (directionX * ACCEL), -SPEED, SPEED)
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED*0.1)
+var mouse_target = null
+# Mouse Input
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			mouse_target = get_global_mouse_position()
 
-	if directionY:
-		velocity.y = clamp(velocity.y + (directionY * ACCEL), -SPEED, SPEED)
+func _physics_process(_delta: float) -> void:
+	var input_direction = Input.get_vector("player_left", "player_right", "player_up", "player_down")
+	if mouse_target == null:
+		velocity = input_direction * SPEED
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED*0.1)
+		velocity = position.direction_to(mouse_target) * SPEED
+		if position.distance_to(mouse_target) < 10 || input_direction:
+			mouse_target = null
+
+
+	
 
 	move_and_slide()
